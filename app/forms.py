@@ -10,6 +10,7 @@ class LoginForm(FlaskForm):
 
 class ClientForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=1, max=64)])
+    phone_number = StringField('Phone Number', validators=[Length(max=20)])
     contact_details = StringField('Contact Details', validators=[Length(max=256)])
     notes = TextAreaField('Notes')
     submit = SubmitField('Save Client')

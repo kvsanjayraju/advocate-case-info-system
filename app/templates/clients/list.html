@@ -19,6 +19,7 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Phone</th>
             <th>Contact Details</th>
             <th>Cases</th>
             <th>Actions</th>
@@ -28,6 +29,7 @@
         {% for client in clients %}
         <tr>
             <td>{{ client.name }}</td>
+            <td>{{ client.phone_number or '' }}</td>
             <td>{{ client.contact_details }}</td>
             <td>{{ client.cases.count() }}</td>
             <td>

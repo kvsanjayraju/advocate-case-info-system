@@ -21,6 +21,7 @@ class User(UserMixin, db.Model):
 class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True)
+    phone_number = db.Column(db.String(20))
     contact_details = db.Column(db.String(256))
     notes = db.Column(db.Text)
     cases = db.relationship('Case', backref='client', lazy='dynamic')
