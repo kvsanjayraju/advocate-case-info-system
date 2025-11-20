@@ -82,3 +82,36 @@ A simple, responsive Case Information System for Advocates built with Python, Fl
 6.  **Login**
 
     Use the credentials you created in step 4 (e.g., `admin@example.com` / `password`).
+
+## SMS Reminders
+
+The system uses Twilio to send SMS reminders to clients one day before their hearing.
+
+1.  **Configure Twilio**
+
+    Set the following environment variables:
+
+    ```bash
+    export TWILIO_SID="your_account_sid"
+    export TWILIO_AUTH_TOKEN="your_auth_token"
+    export TWILIO_FROM_NUMBER="your_twilio_phone_number"
+    export ADVOCATE_PHONE="your_mobile_number"
+    ```
+
+    Add these to your `.env` file or export them in your shell.
+
+2.  **Run the Reminder Job**
+
+    To check for hearings tomorrow and send SMS reminders to the advocate, run:
+
+    ```bash
+    flask send_reminders
+    ```
+
+    **Setting up Cron Job**
+
+    To run this automatically every day at 8 AM:
+
+    ```bash
+    0 8 * * * cd /path/to/advocate-case-info-system && source venv/bin/activate && flask send_reminders
+    ```

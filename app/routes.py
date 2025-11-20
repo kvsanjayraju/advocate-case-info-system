@@ -78,6 +78,7 @@ def new_client():
     form = ClientForm()
     if form.validate_on_submit():
         client = Client(name=form.name.data,
+                        phone_number=form.phone_number.data,
                         contact_details=form.contact_details.data,
                         notes=form.notes.data)
         db.session.add(client)
@@ -96,6 +97,7 @@ def edit_client(id):
     form = ClientForm(obj=client)
     if form.validate_on_submit():
         client.name = form.name.data
+        client.phone_number = form.phone_number.data
         client.contact_details = form.contact_details.data
         client.notes = form.notes.data
         db.session.commit()
