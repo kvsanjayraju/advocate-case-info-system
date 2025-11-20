@@ -1,0 +1,13 @@
+ * Serving Flask app 'run.py'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [20/Nov/2025 07:29:59] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [20/Nov/2025 07:30:00] "[32mPOST /login HTTP/1.1[0m" 302 -
+127.0.0.1 - - [20/Nov/2025 07:30:00] "GET /index HTTP/1.1" 200 -
+127.0.0.1 - - [20/Nov/2025 07:30:00] "GET /client/new HTTP/1.1" 200 -
+127.0.0.1 - - [20/Nov/2025 07:30:00] "[32mPOST /client/new HTTP/1.1[0m" 302 -
+127.0.0.1 - - [20/Nov/2025 07:30:00] "GET /clients HTTP/1.1" 200 -
+127.0.0.1 - - [20/Nov/2025 07:30:00] "GET /clients HTTP/1.1" 200 -
+127.0.0.1 - - [20/Nov/2025 07:30:00] "GET /clients?search=Searchable HTTP/1.1" 200 -

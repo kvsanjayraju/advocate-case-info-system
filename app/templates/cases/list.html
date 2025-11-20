@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Cases</h2>
+    <a href="{{ url_for('main.new_case') }}" class="btn btn-success">Add New Case</a>
+</div>
+
+<form method="get" action="{{ url_for('main.cases') }}" class="row g-3 mb-4">
+    <div class="col-auto">
+        <input type="text" class="form-control" name="search" placeholder="Search cases..." value="{{ request.args.get('search', '') }}">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Case No.</th>
+                <th>Title</th>
+                <th>Client</th>
+                <th>Court</th>
+                <th>Next Hearing</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for case in cases %}
+            <tr>
+                <td>{{ case.case_number }}</td>
+                <td>{{ case.case_title }}</td>
+                <td>{{ case.client.name }}</td>
+                <td>{{ case.court_name }}</td>
+                <td>{{ case.next_hearing_date }}</td>
+                <td>{{ case.status }}</td>
+                <td>
+                    <a href="{{ url_for('main.edit_case', id=case.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
