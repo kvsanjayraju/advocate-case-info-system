@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Active Cases</div>
+            <div class="card-body">
+                <h5 class="card-title display-4">{{ active_count }}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-secondary mb-3">
+            <div class="card-header">Closed Cases</div>
+            <div class="card-body">
+                <h5 class="card-title display-4">{{ closed_count }}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Upcoming Hearings (Next 7 Days)</h3>
+{% if upcoming_hearings %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Case No.</th>
+            <th>Client</th>
+            <th>Court</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for case in upcoming_hearings %}
+        <tr class="{% if case.next_hearing_date == today or case.next_hearing_date == tomorrow %}table-warning{% endif %}">
+            <td>
+                {{ case.next_hearing_date }}
+                {% if case.next_hearing_date == today %}
+                <span class="badge bg-danger">Today</span>
+                {% elif case.next_hearing_date == tomorrow %}
+                <span class="badge bg-warning text-dark">Tomorrow</span>
+                {% endif %}
+            </td>
+            <td><a href="{{ url_for('main.edit_case', id=case.id) }}">{{ case.case_number }}</a></td>
+            <td>{{ case.client.name }}</td>
+            <td>{{ case.court_name }}</td>
+            <td>{{ case.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No upcoming hearings in the next 7 days.</p>
+{% endif %}
+{% endblock %}
