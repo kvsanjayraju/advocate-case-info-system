@@ -10,3 +10,4 @@ class Config:
     TWILIO_SID = os.environ.get('TWILIO_SID')
     TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
     TWILIO_FROM_NUMBER = os.environ.get('TWILIO_FROM_NUMBER')
+    ADVOCATE_PHONE = os.environ.get('ADVOCATE_PHONE')

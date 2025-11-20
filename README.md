@@ -95,13 +95,14 @@ The system uses Twilio to send SMS reminders to clients one day before their hea
     export TWILIO_SID="your_account_sid"
     export TWILIO_AUTH_TOKEN="your_auth_token"
     export TWILIO_FROM_NUMBER="your_twilio_phone_number"
+    export ADVOCATE_PHONE="your_mobile_number"
     ```
 
     Add these to your `.env` file or export them in your shell.
 
 2.  **Run the Reminder Job**
 
-    To check for hearings tomorrow and send SMS reminders, run:
+    To check for hearings tomorrow and send SMS reminders to the advocate, run:
 
     ```bash
     flask send_reminders
