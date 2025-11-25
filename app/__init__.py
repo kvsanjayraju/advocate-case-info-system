@@ -8,8 +8,11 @@ db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
 login.login_view = 'main.login'
+<<<<<<< HEAD
 login.login_message_category = "info"
 
+=======
+>>>>>>> Implement advocate registration flow
 
 def create_app(config_class=Config):
     app = Flask(__name__)

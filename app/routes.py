@@ -4,7 +4,7 @@ from urllib.parse import urlsplit
 from datetime import datetime, timedelta
 from app import db
 from app.models import User, Client, Case
-from app.forms import LoginForm, ClientForm, CaseForm
+from app.forms import LoginForm, RegistrationForm, ClientForm, CaseForm
 from sqlalchemy import or_
 
 bp = Blueprint('main', __name__)
@@ -56,6 +56,20 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(name=form.name.data, email=form.email.data, mobile=form.mobile.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('main.login'))
+    return render_template('register.html', title='Register', form=form)
 
 @bp.route('/clients')
 @login_required
