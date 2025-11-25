@@ -7,7 +7,9 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
-login.login_view = 'login'
+login.login_view = 'main.login'
+login.login_message_category = "info"
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
