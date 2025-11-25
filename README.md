@@ -83,6 +83,16 @@ A simple, responsive Case Information System for Advocates built with Python, Fl
 
     Use the credentials you created in step 4 (e.g., `admin@example.com` / `password`).
 
+## User Registration & Login
+
+New advocates can sign up for an account via the registration page.
+
+1.  Navigate to the Login page.
+2.  Click the "New advocate? Register here" link.
+3.  Fill in your Name, Email, Password, and optional Mobile number.
+4.  Submit the form to create your account.
+5.  You will be redirected to the Login page to sign in with your new credentials.
+
 ## SMS Reminders
 
 The system uses Twilio to send SMS reminders to clients one day before their hearing.
