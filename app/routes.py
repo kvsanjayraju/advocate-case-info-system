@@ -4,15 +4,30 @@ from urllib.parse import urlsplit
 from datetime import datetime, timedelta
 from app import db
 from app.models import User, Client, Case
-from app.forms import LoginForm, ClientForm, CaseForm
+from app.forms import LoginForm, ClientForm, CaseForm, RegisterForm
 from sqlalchemy import or_
 
 bp = Blueprint('main', __name__)
 
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
-@login_required
 def index():
+    if not current_user.is_authenticated:
+        form = RegisterForm()
+        if form.validate_on_submit():
+            user = User(
+                name=form.full_name.data,
+                email=form.email.data,
+                phone=form.phone.data,
+                bar_council_id=form.bar_council_id.data
+            )
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Congratulations, you are now a registered advocate!')
+            return redirect(url_for('main.login'))
+        return render_template('register.html', title='Register', form=form)
+
     # Dashboard
     today = datetime.now().date()
     next_week = today + timedelta(days=7)
@@ -34,6 +49,13 @@ def index():
                            closed_count=closed_count,
                            today=today,
                            tomorrow=today + timedelta(days=1))
+
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    # Redirect to index which handles registration
+    return redirect(url_for('main.index'))
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
